@@ -5,6 +5,8 @@ import java.util.concurrent.TimeUnit;
 public class Image implements Element, Picture {
     private String imageName;
     private Dimension dim;
+    private ImageLoaderFactory factory = new ImageLoaderFactory();
+    private ImageContent content;
 
     public Image(String imageName) {
         this.imageName = imageName;
@@ -60,5 +62,10 @@ public class Image implements Element, Picture {
     public Dimension dim() {
         // TODO Auto-generated method stub
         return this.dim;
+    }
+
+    public void setContent(String type){
+        ImageLoader loader = factory.create(type);
+        content = loader.load("Dummy content");
     }
 }

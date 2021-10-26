@@ -3,13 +3,25 @@ package Lab3;
 
 public class Paragraph implements Element {
     private String text;
+    private AlignStrategy alignStrategy;
 
     public Paragraph(String text) {
         this.text = text;
     }
     public void print(){
-        System.out.println("Paragraph: " + text);
+        if (alignStrategy != null) {
+        alignStrategy.render(this,null);
+        }
+        else {
+            System.out.println("Paragraph: " + text);
+        }
+
     }
+
+    public void setAlignStrategy(AlignStrategy alignStrategy) {
+        this.alignStrategy = alignStrategy;
+    }
+
     @Override
     public void add(Element e) {
         // TODO Auto-generated method stub
@@ -35,5 +47,8 @@ public class Paragraph implements Element {
         else {
             return ((Paragraph) e).text.equals(this.text);
         }
+    }
+    public String getName() {
+        return this.text;
     }
 }
